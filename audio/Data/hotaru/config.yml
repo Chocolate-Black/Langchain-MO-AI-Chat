@@ -1,0 +1,62 @@
+bert_gen:
+  config_path: config.json
+  device: cuda
+  num_processes: 2
+  use_multi_device: false
+dataset_path: Data\hotaru
+emo_gen:
+  config_path: config.json
+  device: cuda
+  num_processes: 2
+  use_multi_device: false
+mirror: ''
+openi_token: ''
+preprocess_text:
+  clean: true
+  cleaned_path: filelists/cleaned.list
+  config_path: config.json
+  max_val_total: 8
+  train_path: filelists/train.list
+  transcription_path: filelists/short_character_anno.list
+  val_path: filelists/val.list
+  val_per_lang: 4
+resample:
+  in_dir: raw
+  out_dir: wavs
+  sampling_rate: 44100
+server:
+  device: cuda
+  models:
+  - config: Data\hotaru\config.json
+    device: cuda
+    language: ZH
+    model: Data\hotaru\models\G_3600.pth
+    speakers: []
+  port: 5000
+train_ms:
+  base:
+    model_image: "Bert-VITS2_2.3\u5E95\u6A21"
+    repo_id: Stardust_minus/Bert-VITS2
+    use_base_model: false
+  config_path: config.json
+  env:
+    LOCAL_RANK: 0
+    MASTER_ADDR: localhost
+    MASTER_PORT: 10086
+    RANK: 0
+    WORLD_SIZE: 1
+  keep_ckpts: 10
+  model: models
+  num_workers: 8
+  spec_cache: true
+translate:
+  app_key: ''
+  secret_key: ''
+webui:
+  config_path: config.json
+  debug: false
+  device: cuda
+  language_identification_library: langid
+  model: models/G_3600.pth
+  port: 7860
+  share: false

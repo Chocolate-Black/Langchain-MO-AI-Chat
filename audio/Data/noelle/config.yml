@@ -1,0 +1,82 @@
+bert_gen:
+  config_path: config.json
+  device: cuda
+  num_processes: 2
+  use_multi_device: false
+dataset_path: Data\Noelle
+emo_gen:
+  config_path: config.json
+  device: cuda
+  num_processes: 2
+  use_multi_device: false
+mirror: ''
+openi_token: ''
+preprocess_text:
+  clean: true
+  cleaned_path: filelists/cleaned.list
+  config_path: config.json
+  max_val_total: 25
+  train_path: filelists/train.list
+  transcription_path: filelists/short_character_anno.list
+  val_path: filelists/val.list
+  val_per_lang: 25
+resample:
+  in_dir: raw
+  out_dir: wavs
+  sampling_rate: 44100
+server:
+  device: cuda
+  models:
+  - config: ''
+    device: cuda
+    language: ZH
+    model: ''
+    speakers:
+    - length_scale: 1
+      noise_scale: 0.6
+      noise_scale_w: 0.8
+      sdp_ratio: 0.2
+      speaker: "\u79D1\u6BD4"
+    - length_scale: 0.5
+      noise_scale: 0.7
+      noise_scale_w: 0.8
+      sdp_ratio: 0.3
+      speaker: "\u4E94\u6761\u609F"
+    - length_scale: 1.2
+      noise_scale: 0.6
+      noise_scale_w: 0.8
+      sdp_ratio: 0.2
+      speaker: "\u5B89\u500D\u664B\u4E09"
+  - config: ''
+    device: cpu
+    language: JP
+    model: ''
+    speakers: []
+  port: 5000
+train_ms:
+  base:
+    model_image: "Bert-VITS2_2.3\u5E95\u6A21"
+    repo_id: Stardust_minus/Bert-VITS2
+    use_base_model: false
+  config_path: config.json
+  env:
+    LOCAL_RANK: 0
+    MASTER_ADDR: localhost
+    MASTER_PORT: 10086
+    RANK: 0
+    WORLD_SIZE: 1
+  keep_ckpts: 10
+  model: models
+  num_workers: 10
+  spec_cache: true
+translate:
+  app_key: ''
+  secret_key: ''
+webui:
+  config_path: config.json
+  debug: false
+  device: cuda
+  language_identification_library: langid
+  model: models/G_500.pth
+  port: 7860
+  share: false
