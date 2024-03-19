@@ -456,9 +456,9 @@ def run_webui(started_event: mp.Event = None, run_mode: str = None):
     if LAZY_MODE:
         # 特别强调，如果你使用的是懒人版（自带环境），请使用这部分代码。
         cur_dir_path = os.path.dirname(os.path.abspath(__file__))
-        stream_lit_path = os.path.join(cur_dir_path,'llm_env','Scripts','streamlit.exe')
+        stream_lit_path = os.path.join(cur_dir_path,'venv','python.exe')
 
-        cmd = [stream_lit_path, "run", "webui.py",
+        cmd = [stream_lit_path,"-m","streamlit","run", "webui.py",
             "--server.address", host,
             "--server.port", str(port),
             "--theme.base", "light",
